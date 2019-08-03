@@ -1,0 +1,19 @@
+$(document).ready(function(){
+    $('#Categ').change(function(d){
+        d.preventDefault();
+        var categoryId = $(this).val();
+             Pace.restart(); 
+             $.ajax({               
+                url:'/categsSubcategs',
+                type:'GET',
+                data:{categoryId:categoryId},
+                success:function(result)
+                {
+                    $('#Subcategory').html(result);
+                },
+                error:function(){
+                    alert('okkkk');
+                }   
+                }); 
+    });
+});

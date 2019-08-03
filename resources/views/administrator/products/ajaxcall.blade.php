@@ -1,0 +1,3 @@
+@isset($id)
+    {{ $data }}
+@endisset
