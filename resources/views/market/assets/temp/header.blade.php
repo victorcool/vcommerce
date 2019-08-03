@@ -3,7 +3,7 @@
 	<div class="container">
 		
 		<div class="logo">
-			<h1 ><a href="index.html"><b>T<br>H<br>E</b>Big Store<span>The Best Supermarket</span></a></h1>
+			<h1 ><a href="index.html"><img src="{{asset('uploads/healmassLogo.png')}}" class="img-fluid" style="width:4em; line-height:0%;" alt="logo"> </span></a></h1>
 		</div>
 		<div class="head-t">
 			<ul class="card">

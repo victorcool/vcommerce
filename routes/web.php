@@ -38,6 +38,7 @@ Route::get('/categsSubcategs','admin\ProductsController@loadsubcategs');
 
 Route::group(['administrator' => 'administrator'], function(){
     Route::get('/administrator','AdminPagesController@index');
+    Route::resource('administrator/tags','admin\TagsController');
 // Route::resource('administrator/products','admin\AjaxController');
 
     //Route::get('administrator/posts/create', 'PostsController@create');

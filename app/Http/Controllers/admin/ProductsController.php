@@ -11,6 +11,7 @@ use View;
 use App\Product;
 use App\SubCategory;
 use App\product_images;
+use App\product_tags;
 use DB;
 
 class ProductsController extends Controller
@@ -93,14 +94,14 @@ class ProductsController extends Controller
         $product->qauntity = $request->input('quantity');
         if($product->save())
         {
+            $last_inserted_product_id = $product->id;
         if($request->hasfile('image'))
         {    
             // loop through array of images
             foreach($request->file('image') as $image)
             {            
                 $name = $image->getClientOriginalName();
-                $image->move(public_path().'/uploads/products_images/', $name);             
-                
+                $image->move(public_path().'/uploads/products_images/', $name);      
                 $productImg = new product_images;
                 $productImg->category_id = $request->input('category');
                 $productImg->sub_category_id = $request->input('subcategory');
@@ -117,6 +118,14 @@ class ProductsController extends Controller
             $productImg->sub_category_id = $request->input('subcategory');
             $productImg->save();
         }
+            // loop through array of tags
+            foreach($request->tag as $itemTag)
+            {            
+                $productTag = new product_tags;
+                $productTag->tag_id = $itemTag;
+                $productTag->product_id = $last_inserted_product_id;
+                $productTag->save();
+            }
         return redirect()->to('/administrator/products')->with('success','New product created');  
         }      
         

@@ -56,7 +56,23 @@
               </span><span class="label label-warning" id="allB"></span></a></li>
           </ul>
       </li> 
-      </ul>
+
+      <li class="treeview notifications-menu">
+        <a href="#">
+          <span class="sidebarMenu"><i class="fa fa-list"></i>
+          Other Settings</span>
+          <!-- <span class="label label-success">0</span> -->
+          <span class="pull-right-container sidebarMenu">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <!-- <li><a href="#"><i class="fa fa-eye"></i>View alert</a></li> -->
+          <li><a href="{{url('administrator/tags')}}"><span class="sidebarMenu"><i class="fa fa-circle-o text-yellow"></i> Tags<span class="label label-primary" id="availB"></span></a></li>
+        </ul>
+    </li>
+      </ul>     
+
     </section>
     <!-- /.sidebar -->
   </aside>

@@ -25,7 +25,7 @@
                     <td>
                     <a href="categories/{{$category->id}}/edit" class="label label-success"><i class="fa fa-pencil"></i> Edit</span></a>
                        {{!! Form::open(['action' => ['admin\CategoriesController@destroy',$category->id], 'method' => 'POST'])!!}}
-                       {{ csrf_field() }}
+                       
                        {{Form::hidden('_method','DELETE')}}
                        {{Form::submit('remove', ['class' => 'btn btn-default btn-xs'])}}
                        {{!! Form::close() !!}}

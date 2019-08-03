@@ -19,25 +19,16 @@
               @foreach ($products as $product)
               <tr>
                   <td>{{$product->product_name}}</td>
-                    <td>{{$product->quantity}}</td>
+                    <td>{{$product->qauntity}}</td>
                     <td>@php echo number_format($product->regular_price); @endphp</td>
                     <td>@php echo number_format($product->discount_price); @endphp</td>
                     <td>{{$product->created_at}}</td>
-                  <td><a href="{{url('administrator/products/create')}}"><i class="fa fa-eye"></i></a></td>              
+                  <td><a href="{{url('administrator/products/'.$product->id.'/edit')}}"><i class="fa fa-pencil"></i></a></td>              
                   </tr> 
               @endforeach
                      
             </tbody>
-            <tfoot>
-            <tr>
-            <th>Product Name</th>
-            <th>Quantity</th>
-            <th>Regular price</th>
-            <th>Discount price</th>
-            <th>Date created</th>
-            <th>More</th>
-            </tr>
-            </tfoot>
+           
           </table>
         </div>
         <!-- /.box-body -->

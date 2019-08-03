@@ -8,7 +8,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-            <h1><a class="navbar-brand" href="{{url('/')}}"> {{config('app.name')}} </a></h1>
+            <h1><a class="navbar-brand" href="{{url('/')}}">
+                <img src="{{asset('uploads/healmassLogo.png')}}" class="img-fluid" style="width:4em; line-height:0%;" alt="logo">    
+                </a></h1>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
