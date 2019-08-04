@@ -73,7 +73,7 @@ class CategoriesController extends Controller
         // $categ = DB::table('categories')->where('category_name',$newCateg)->count();
         $categ = Category::all()->where('category_name',$newCateg);
         if (count($categ) > 0) {
-            return redirect()->back()->with(flash_error_session('error','it worked'));
+            return redirect()->back()->with(flash_error_session('error','Category Already Exist'));
         }
 
         $category = new Category;
