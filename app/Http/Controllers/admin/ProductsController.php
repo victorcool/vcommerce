@@ -12,6 +12,7 @@ use App\Product;
 use App\SubCategory;
 use App\product_images;
 use App\product_tags;
+use App\tags;
 use DB;
 
 class ProductsController extends Controller
@@ -34,7 +35,7 @@ class ProductsController extends Controller
     }
 
     public function ProductTags(){
-        $tags = product_tags::all();
+        $tags = tags::all();
         return $tags;
     }
 
@@ -43,9 +44,6 @@ class ProductsController extends Controller
         $products = Product::all();
         return view('administrator.products.index')->with('products',$products);
     }
-
-  
-
     /**
      * Show the form for creating a new resource.
      *

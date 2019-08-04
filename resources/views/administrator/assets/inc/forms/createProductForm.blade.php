@@ -65,13 +65,10 @@
                       <label for="tag">Tag</label>
                       <select class="form-control select2 input-sm" name="tag[]" multiple="multiple" data-placeholder="Select a Tag"
                               style="width: 100%;">
-                        <option>healmass</option>
-                        <option>parent</option>
-                        <option>banner</option>
-                        <option>slider</option>
-                        <option>Tennessee</option>
-                        <option>Texas</option>
-                        <option>Washington</option>
+                        {{-- from ProductsController --}}
+                        @foreach ($tags as $tag)
+                        <option value="{{$tag->id}}">{{$tag->name}}</option>
+                        @endforeach                        
                       </select>
                     </div>
                   </div>
