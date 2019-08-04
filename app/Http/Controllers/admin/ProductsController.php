@@ -54,12 +54,6 @@ class ProductsController extends Controller
         return view::make('administrator.products.create')->with('tags',$this->productTags());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $rules = [
@@ -74,53 +68,53 @@ class ProductsController extends Controller
             'tag'=> 'required'
         ];
 
-    $validator = Validator::make($request->all(), $rules);
-    if ($validator->fails()) {
-        $tag = $request->input('tag');
-        return redirect()->back()->withInput()->withErrors($validator);
-    }else{
-        $regular_price = $request->input('regularPrice');
-        $discount_price = $request->input('discountPrice');
-        // is discount<regular?
-    if ($discount_price >= $regular_price) {
-        return redirect()->back()->withInput()->with('error','ERROR: Discount price can not be greater than or equal to regular price');
-    }else {
-        try {
-        $product = new Product;
-        $product->product_name = $request->input('product_name');
-        $product->regular_price = $request->input('regularPrice');
-        $product->discount_price = $request->input('discountPrice');
-        $product->product_status_id = $request->input('status');
-        $product->description = $request->input('description');
-        $product->category_id = $request->input('category');
-        $product->subcateg_id = $request->input('subcategory');
-        $product->qauntity = $request->input('quantity');
-        if($product->save())
-        {
-            $last_inserted_product_id = $product->id;
-        if($request->hasfile('image'))
-        {    
-            // loop through array of images
-            foreach($request->file('image') as $image)
-            {            
-                $name = $image->getClientOriginalName();
-                $image->move(public_path().'/uploads/products_images/', $name);      
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            $tag = $request->input('tag');
+            return redirect()->back()->withInput()->withErrors($validator);
+        }else{
+            $regular_price = $request->input('regularPrice');
+            $discount_price = $request->input('discountPrice');
+            // is discount<regular?
+        if ($discount_price >= $regular_price) {
+            return redirect()->back()->withInput()->with('error','ERROR: Discount price can not be greater than or equal to regular price');
+        }else {
+            try {
+            $product = new Product;
+            $product->product_name = $request->input('product_name');
+            $product->regular_price = $request->input('regularPrice');
+            $product->discount_price = $request->input('discountPrice');
+            $product->product_status_id = $request->input('status');
+            $product->description = $request->input('description');
+            $product->category_id = $request->input('category');
+            $product->subcateg_id = $request->input('subcategory');
+            $product->qauntity = $request->input('quantity');
+            if($product->save())
+            {
+                $last_inserted_product_id = $product->id;
+            if($request->hasfile('image'))
+            {    
+                // loop through array of images
+                foreach($request->file('image') as $image)
+                {            
+                    $name = $image->getClientOriginalName();
+                    $image->move(public_path().'/uploads/products_images/', $name);      
+                    $productImg = new product_images;
+                    $productImg->category_id = $request->input('category');
+                    $productImg->sub_category_id = $request->input('subcategory');
+                    $productImg->image = $name;
+                    $productImg->save();
+                }
+            }
+            else
+            {
                 $productImg = new product_images;
+                $fileNameToStore = 'noimage.jpg';
+                $productImg->image = $fileNameToStore;
                 $productImg->category_id = $request->input('category');
                 $productImg->sub_category_id = $request->input('subcategory');
-                $productImg->image = $name;
                 $productImg->save();
             }
-        }
-        else
-        {
-            $productImg = new product_images;
-            $fileNameToStore = 'noimage.jpg';
-            $productImg->image = $fileNameToStore;
-            $productImg->category_id = $request->input('category');
-            $productImg->sub_category_id = $request->input('subcategory');
-            $productImg->save();
-        }
             // loop through array of tags
             foreach($request->tag as $itemTag)
             {            
@@ -142,46 +136,34 @@ class ProductsController extends Controller
         // return $discount_price;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        return 'show';
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit($id)
     {
-        //
+       $prevProduct = DB::table('products as p')
+        ->join('categories as c', 'p.category_id', '=', 'c.id')
+        ->join('sub_categories as s', 'p.subcateg_id', '=', 's.id')
+        ->join('product_tags as pt','pt.product_id','=','p.id')
+        ->join('tags as t','t.id','=','pt.tag_id')
+        ->select('*','t.name','category_name','subcateg_name','p.id as productId','t.id as tagId')
+        ->where('p.id',$id)
+        ->get();
+        
+        return view::make('administrator.products.edit')
+        ->with(['tags' => $this->productTags(),'prevProduct'=>$prevProduct]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function destroy($id)
     {
         //

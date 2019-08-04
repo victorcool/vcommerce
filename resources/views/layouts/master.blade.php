@@ -38,6 +38,9 @@
         </div>
         <div class="box-body">
           @include('administrator.assets.inc.messages')
+          <span>
+              <a href="{{url()->previous()}}"c class="btn btn-default btn-sm pull-right"><i class="fa fa-long-arrow-left"></i> Back</a>
+          </span>
           @yield('content')
         </div>
         <!-- /.box-body -->
