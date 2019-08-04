@@ -79,8 +79,20 @@ class TagsController extends Controller
     }
 
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        if ($request->has('tagId')) {
+            $tagId = $request->tagId;
+            $tag = tags::find($tagId);            
+            if($tag->delete())
+            {
+                echo "deleted";
+            }else{
+                throw new Exception("Error Processing Request", 1);
+                
+            }
+
+
+        }
     }
 }

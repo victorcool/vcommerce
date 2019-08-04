@@ -33,6 +33,11 @@ class ProductsController extends Controller
         }
     }
 
+    public function ProductTags(){
+        $tags = product_tags::all();
+        return $tags;
+    }
+
     public function index()
     {
         $products = Product::all();
@@ -48,7 +53,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view::make('administrator.products.create');
+        return view::make('administrator.products.create')->with('tags',$this->productTags());
     }
 
     /**

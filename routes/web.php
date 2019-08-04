@@ -33,7 +33,10 @@ Route::resource('administrator/posts','PostsController');
 Route::resource('administrator/products','admin\ProductsController');
 Route::resource('administrator/categories','admin\CategoriesController');
 Route::resource('administrator/subcateg','admin\subCategsController');
+
+// Performing actions with Ajax here
 Route::get('/categsSubcategs','admin\ProductsController@loadsubcategs');
+Route::get('/removeTag','admin\TagsController@destroy');
 
 
 Route::group(['administrator' => 'administrator'], function(){
