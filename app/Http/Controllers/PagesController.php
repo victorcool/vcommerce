@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use View;
+use App\Product;
 
 class PagesController extends Controller
 { 
@@ -39,7 +42,14 @@ class PagesController extends Controller
 
     public function products(){
         $title = 'Healmass produts';
-        return view('pages.products');
+        $products = DB::table('products as p')
+            ->leftjoin('product_tags as t', 't.product_id', '=', 'p.id')
+            ->leftjoin('tags as ts', 'ts.id', '=', 't.tag_id')
+            ->where('ts.name','=','healmass')
+            ->select('*','ts.name as tagName')
+            ->get();
+            
+        return view('pages.products')->with('products',$products);
     }
 
    

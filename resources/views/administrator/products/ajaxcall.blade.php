@@ -1,3 +1,0 @@
-@isset($id)
-    {{ $data }}
-@endisset

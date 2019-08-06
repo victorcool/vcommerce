@@ -100,8 +100,7 @@ class ProductsController extends Controller
                     $name = $image->getClientOriginalName();
                     $image->move(public_path().'/uploads/products_images/', $name);      
                     $productImg = new product_images;
-                    $productImg->category_id = $request->input('category');
-                    $productImg->sub_category_id = $request->input('subcategory');
+                    $productImg->product_id = $last_inserted_product_id;
                     $productImg->image = $name;
                     $productImg->save();
                 }
@@ -111,8 +110,7 @@ class ProductsController extends Controller
                 $productImg = new product_images;
                 $fileNameToStore = 'noimage.jpg';
                 $productImg->image = $fileNameToStore;
-                $productImg->category_id = $request->input('category');
-                $productImg->sub_category_id = $request->input('subcategory');
+                $productImg->product_id = $last_inserted_product_id;
                 $productImg->save();
             }
             // loop through array of tags
@@ -145,12 +143,13 @@ class ProductsController extends Controller
     public function edit($id)
     {
        $prevProduct = DB::table('products as p')
-        ->join('categories as c', 'p.category_id', '=', 'c.id')
-        ->join('sub_categories as s', 'p.subcateg_id', '=', 's.id')
-        ->join('product_tags as pt','pt.product_id','=','p.id')
-        ->join('tags as t','t.id','=','pt.tag_id')
-        ->select('*','t.name','category_name','subcateg_name','p.id as productId','t.id as tagId')
+        ->leftjoin('categories as c', 'p.category_id', '=', 'c.id')
+        ->leftjoin('sub_categories as s', 'p.subcateg_id', '=', 's.id')
+        ->leftjoin('product_tags as pt','pt.product_id','=','p.id')
+        ->leftjoin('tags as t','t.id','=','pt.tag_id')
+        ->leftjoin('product_images as i','i.product_id','=','p.id')
         ->where('p.id',$id)
+        ->select('*','t.name','category_name','p.description as productDescription','subcateg_name','p.id as productId','t.id as tagId','i.id as imgId')
         ->get();
         
         return view::make('administrator.products.edit')
