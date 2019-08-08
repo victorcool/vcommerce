@@ -19,8 +19,9 @@
                     <li class="menu__item menu__item--current"><a href="{{url('/')}}" class="menu__link">Home</a></li>
                         <li class="menu__item"><a href="{{url('/products')}}" class="menu__link">Our products</a></li>
                         <li class="menu__item"><a href="{{url('/services')}}" class="menu__link">Our services</a></li>
-                        <li class="menu__item"><a href="{{url('/about')}}" class="menu__link">About us</a></li>
                         <li class="menu__item"><a href="{{url('/market')}}" class="menu__link">Market</a></li>
+                        <li class="menu__item"><a href="{{url('/about')}}" class="menu__link">About us</a></li>
+                        
                         {{-- <li class="dropdown menu__item">
                             <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown">Short codes<b class="caret"></b></a>
                             <ul class="dropdown-menu agile_short_dropdown">						

@@ -40,17 +40,34 @@ class PagesController extends Controller
         return view('pages.contact')->with('title',$title);
     }
 
-    public function products(){
-        $title = 'Healmass produts';
-        $products = DB::table('products as p')
-            ->leftjoin('product_tags as t', 't.product_id', '=', 'p.id')
-            ->leftjoin('tags as ts', 'ts.id', '=', 't.tag_id')
-            ->where('ts.name','=','healmass')
-            ->select('*','ts.name as tagName')
-            ->get();
+public function products()
+{
+    $title = 'Healmass produts';
+    $products = DB::table('products as p')
+    ->leftjoin('product_tags as t', 't.product_id', '=', 'p.id')
+    ->leftjoin('tags as ts', 'ts.id', '=', 't.tag_id')
+    ->leftjoin('product_images as pi', function($leftjoin){
+    $leftjoin->on('p.id', '=', 'pi.product_id')
+    ->where('pi.id','=',DB::raw("(SELECT id FROM product_images where product_images.product_id =  p.id limit 1)"));
+    })  
+    ->where('ts.name','=','healmass')
+    ->select('*','ts.name as tagName')         
+    ->get();
+
+    return view('pages.products')->with('products',$products);
+}
+    // public function products(){
+    //     $title = 'Healmass produts';
+    //     $products = DB::table('products as p')
+    //         ->leftjoin('product_tags as t', 't.product_id', '=', 'p.id')
+    //         ->leftjoin('tags as ts', 'ts.id', '=', 't.tag_id')
+    //         ->leftjoin('product_images as pi', 'pi.product_id', '=', 'p.id')
+    //         ->where('ts.name','=','healmass')
+    //         ->select('*','ts.name as tagName')
+    //         ->get();
             
-        return view('pages.products')->with('products',$products);
-    }
+    //     return view('pages.products')->with('products',$products);
+    // }
 
    
 }

@@ -69,6 +69,7 @@
         <ul class="treeview-menu">
           <!-- <li><a href="#"><i class="fa fa-eye"></i>View alert</a></li> -->
           <li><a href="{{url('administrator/tags')}}"><span class="sidebarMenu"><i class="fa fa-circle-o text-yellow"></i> Tags<span class="label label-primary" id="availB"></span></a></li>
+          <li><a href="{{url('administrator/configurations')}}"><span class="sidebarMenu"><i class="fa fa-circle-o text-yellow"></i> Configuration<span class="label label-primary" id="availB"></span></a></li>
         </ul>
     </li>
       </ul>     

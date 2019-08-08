@@ -42,6 +42,7 @@ Route::get('/removeTag','admin\TagsController@destroy');
 Route::group(['administrator' => 'administrator'], function(){
     Route::get('/administrator','AdminPagesController@index');
     Route::resource('administrator/tags','admin\TagsController');
+    Route::resource('administrator/configurations','admin\SettingsController');
 // Route::resource('administrator/products','admin\AjaxController');
 
     //Route::get('administrator/posts/create', 'PostsController@create');

@@ -7,8 +7,8 @@
                         <div class="container">
                             <div class="agileits-banner-info">
                             
-                                <h3>WE ARE PROFESSIONAL DESIGNERS </h3>
-                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sed blandit massa vel mauris sollicitudin dignissim.</p>
+                                <h3>War Against Hunger </h3>
+                                 {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sed blandit massa vel mauris sollicitudin dignissim.</p> --}}
                                 
                             </div>	
                         </div>
@@ -19,8 +19,8 @@
                     <div class="container">
                             <div class="agileits-banner-info">
                              
-                                <h3>WE ARE EXPERIENCED  DESIGNERS</h3>
-                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sed blandit massa vel mauris sollicitudin dignissim.</p>
+                                <h3>Heal The Mass Against Hunger </h3>
+                                 {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sed blandit massa vel mauris sollicitudin dignissim.</p> --}}
                                 
                             </div>	
                         </div>
@@ -31,8 +31,8 @@
                         <div class="container">
                             <div class="agileits-banner-info">
                                 
-                                <h3>WE ARE QUALITY  DESIGNERS</h3>
-                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sed blandit massa vel mauris sollicitudin dignissim.</p>
+                                <h3>WAR AGAINST HUNGER</h3>
+                                 {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sed blandit massa vel mauris sollicitudin dignissim.</p> --}}
                                 
                             </div>
                             
@@ -44,8 +44,8 @@
                         <div class="container">
                             <div class="agileits-banner-info">
                              
-                                <h3>WE ARE FRIENDLY  DESIGNERS</h3>
-                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sed blandit massa vel mauris sollicitudin dignissim.</p>
+                                <h3>WAR AGAINST HUNGER</h3>
+                                 {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sed blandit massa vel mauris sollicitudin dignissim.</p> --}}
                                 
                             </div>
                             

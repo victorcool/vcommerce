@@ -8,6 +8,7 @@ use Validator;
 use Redirect;
 use Session;
 use View;
+use Image;
 use App\Product;
 use App\SubCategory;
 use App\product_images;
@@ -96,12 +97,13 @@ class ProductsController extends Controller
             {    
                 // loop through array of images
                 foreach($request->file('image') as $image)
-                {            
+                {          
                     $name = $image->getClientOriginalName();
-                    $image->move(public_path().'/uploads/products_images/', $name);      
+                    $filename = time().'.'.$image->getClientOriginalExtension();
+                    Image::make($image)->resize(320,320)->save(public_path('/uploads/products_images/'. $filename));      
                     $productImg = new product_images;
                     $productImg->product_id = $last_inserted_product_id;
-                    $productImg->image = $name;
+                    $productImg->image = $filename;
                     $productImg->save();
                 }
             }
