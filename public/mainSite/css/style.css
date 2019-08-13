@@ -5,8 +5,18 @@ body{
 	font-family: 'Open Sans', sans-serif;
  }
 
+ /* victorcool custom styling */
+.serviceImg {
+    box-shadow:0px 15px 8px #ccc;
+}
 
-
+/* victorcool media query */
+@media(max-width:375px){
+    .serviceImg{
+        max-width: 150px;
+    }
+}
+/* END */
 
 
 /* another tempxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */

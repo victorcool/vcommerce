@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use DB;
 use View;
 use App\Product;
+use App\Setting;
+use App\Service;
 
 class PagesController extends Controller
 { 
@@ -21,8 +23,8 @@ class PagesController extends Controller
 
     public function services(){
         $title = 'Our services are outstanding';
-
-        return view('pages.services', compact('title'));
+        $services = Service::all();
+        return view('pages.services', compact('title'))->with('services',$services);
     }
 
     public function login(){
@@ -37,7 +39,8 @@ class PagesController extends Controller
 
     public function contact(){
         $title = 'We are always here for you 24/7';
-        return view('pages.contact')->with('title',$title);
+        $settings = Setting::all();
+        return view('pages.contact')->with(['title' => $title, 'settings' => $settings]);
     }
 
 public function products()

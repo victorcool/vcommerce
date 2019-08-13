@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+// For
 Route::group(['mainSite' => 'mainSite'], function(){
     Route::get('/','PagesController@index');
     Route::get('/about', 'pagesController@about');
@@ -33,18 +36,23 @@ Route::resource('administrator/posts','PostsController');
 Route::resource('administrator/products','admin\ProductsController');
 Route::resource('administrator/categories','admin\CategoriesController');
 Route::resource('administrator/subcateg','admin\subCategsController');
+// For the AOB controller
+Route::post('administrator/services/edit/{id}','admin\AOBcontroller@update')->name('serviceUpdate');
+Route::post('administrator/services/img/{id}','admin\AOBcontroller@updateServiceImg')->name('updateServiceImg');
 
 // Performing actions with Ajax here
 Route::get('/categsSubcategs','admin\ProductsController@loadsubcategs');
 Route::get('/removeTag','admin\TagsController@destroy');
+Route::get('/removeService','admin\servicesController@destroy');
 
 
 Route::group(['administrator' => 'administrator'], function(){
     Route::get('/administrator','AdminPagesController@index');
     Route::resource('administrator/tags','admin\TagsController');
     Route::resource('administrator/configurations','admin\SettingsController');
-// Route::resource('administrator/products','admin\AjaxController');
+    
+    // Route::resource('administrator/services','admin\servicesController');
+    Route::get('administrator/services', 'admin\AOBcontroller@index');
 
-    //Route::get('administrator/posts/create', 'PostsController@create');
-    //Route::post('administrator/posts/create', 'PostsController@store');
+    Route::get('administrator/services/edit/{id}', 'admin\AOBcontroller@edit');
 });

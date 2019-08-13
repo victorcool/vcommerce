@@ -7,12 +7,12 @@
       </div>
     
     <div class="wrap-custom-file col-md-3 col-xs-6">
-        <input type="file" name="image[]" id="image2" accept=".gif, .jpg, .png" />
-        <label  for="image2">
-          <span>Image Two</span>
-          <i class="fa fa-plus-circle"></i>
-        </label>
-      </div>
+      <input type="file" name="image[]" id="image2" accept=".gif, .jpg, .png" />
+      <label  for="image2">
+        <span>Image Two</span>
+        <i class="fa fa-plus-circle"></i>
+      </label>
+    </div>
     
       <div class="wrap-custom-file col-md-3 col-xs-6">
         <input type="file" name="image[]" id="image3" accept=".gif, .jpg, .png" />

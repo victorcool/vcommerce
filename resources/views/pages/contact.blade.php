@@ -16,6 +16,7 @@
 
 	<!-- footer -->
 <!-- contact -->
+@foreach ($settings as $setting)@endforeach
 	<div class="contact" id="contact">
 		<div class="container">
 			<div class="w3-heading-all">
@@ -30,7 +31,7 @@
 						</div>
 						<div class="col-md-10 w3-agile-address-right">
 							<h5>Visit Us</h5>
-							<p>123 Fourth Avenue, SEATTLE WA 98104, San Francisco </p>
+						<p>{{$setting->address}}</p>
 						</div>
 						<div class="clearfix"> </div>
 					</div>
@@ -40,7 +41,7 @@
 						</div>
 						<div class="col-md-10 w3-agile-address-right">
 							<h5>Mail Us</h5>
-							<p><a href="mailto:info@example.com"> mail@example.com</a></p>
+							<p><a href="mailto:{{$setting->email1}}"> {{$setting->email1}}</a></p>
 						</div>
 						<div class="clearfix"> </div>
 					</div>
@@ -50,7 +51,36 @@
 						</div>
 						<div class="col-md-10 w3-agile-address-right">
 							<h5>Call Us</h5>
-							<p>+11 222 333 4444</p>
+							<p>{{$setting->phone1}}</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class="address-row">
+						<div class="col-md-2 w3-agile-address-left">
+							<span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
+						</div>
+						<div class="col-md-10 w3-agile-address-right">
+							<h5>Also Call Us</h5>
+							<p>{{$setting->phone2}}</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class="address-row">
+						
+						<div class="col-md-10 w3-agile-address-right">
+								<h5>Follow us on:</h5>
+							<div class="row">
+								<div class="col-md-2 w3-agile-address-left">
+										<a href="{{$setting->facebook}}"><i class="fa fa-facebook-f fa-2x"></i></a>
+								</div>
+								<div class="col-md-2 w3-agile-address-left">
+									<a href="{{$setting->instagram}}"><i class="fa fa-instagram fa-2x"></i></a>
+								</div>
+								<div class="col-md-2 w3-agile-address-left">
+										<a href="{{$setting->twitter}}"><i class="fa fa-twitter fa-2x"></i></a>
+								</div>	
+							</div>
+							
 						</div>
 						<div class="clearfix"> </div>
 					</div>

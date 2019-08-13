@@ -37,7 +37,7 @@
         <li class="header">LABELS</li>
         <li><a href="{{url('administrator/posts')}}"><i class="fa fa-circle-o text-red"></i> <span>Posts</span></a></li>
         <li><a href="{{url('administrator/products')}}"><i class="fa fa-circle-o text-yellow"></i> <span>Products</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Services</span></a></li>
+        <li><a href="{{url('administrator/services')}}"><i class="fa fa-circle-o text-aqua"></i> <span>Services</span></a></li>
         
         <li class="header">MARKET SETTINGS</li>
         <li class="treeview notifications-menu">
