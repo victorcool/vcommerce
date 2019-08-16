@@ -8,12 +8,32 @@ body{
  /* victorcool custom styling */
 .serviceImg {
     box-shadow:0px 15px 8px #ccc;
+    width: 200px;
+}
+
+h1,h2,h3,h4,h5,h6{
+    padding-top: 4%;
+    padding-bottom: 4%;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 4px;
+}
+p{
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 4px;
 }
 
 /* victorcool media query */
 @media(max-width:375px){
     .serviceImg{
         max-width: 150px;
+    }
+    h1,h2,h3,h4,h5,h6{
+        font-size-adjust: inherit;
+        font-size: 12px;
+    }
+    #my_p{
+        font-size: 8px;
     }
 }
 /* END */

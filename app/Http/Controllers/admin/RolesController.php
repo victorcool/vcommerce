@@ -4,6 +4,11 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Validator;
+use Redirect;
+use Session;
+use View;
+use App\Role;
 
 class RolesController extends Controller
 {
@@ -14,7 +19,8 @@ class RolesController extends Controller
      */
     public function index()
     {
-        //
+        $roles = Role::all();
+        return view::make('administrator.UserRoles.index')->with('roles',$roles);
     }
 
     /**
@@ -24,7 +30,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        //
+        return view::make('administrator.UserRoles.create');
     }
 
     /**
@@ -35,7 +41,29 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'role_name' => 'required'
+        ];
+
+        $validator = validator::make($request->all(),$rules);
+        if ($validator->fails()) {
+            return redirect()->back()->withErros($validator);
+        }
+        else
+        {
+            // check for uniq role name
+            $newRole = $request->input('role_name');
+            // $categ = DB::table('categories')->where('role_name',$newCateg)->count();
+            $checkTag = Role::all()->where('role_name',$newRole);
+            if (count($checkTag) > 0) {
+                return redirect()->back()->with(flash_error_session('error','Tag Already Exist'));
+            }
+            $role = new Role;
+            $role->role_name = $request->input('role_name');       
+            if ( $role->save()) {            
+                return redirect('administrator/UserRoles')->with(flash_error_session('success','Role created'));
+            }
+        }
     }
 
     /**
@@ -57,7 +85,8 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::findOrfail($id);
+        return view::make('administrator.UserRoles.edit')->with('role',$role);
     }
 
     /**
@@ -69,7 +98,28 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'role_name' => 'required'
+        ];
+
+        $validator = validator::make($request->all(),$rules);
+        if ($validator->fails()) {
+            return redirect()->back()->withErros($validator);
+        }
+        else
+        {
+            try {
+                 // let update start
+                $role = Role::find($id);
+                $role->role_name = $request->input('role_name');
+                $role->save();
+                return redirect('/administrator/UserRoles')->with('success','role Updated');
+            } catch (\Throwable $th) {
+                $error =  Session::flash('error', 'Sorry, operation could not be completed.'.$th->getMessage());
+                return redirect()->back()->with($error);
+            }
+       
+        }
     }
 
     /**
@@ -78,8 +128,18 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        if ($request->has('roleId')) {
+            $roleId = $request->roleId;
+            $roleId = Role::find($roleId);            
+            if($roleId->delete())
+            {
+                echo "deleted";
+            }else{
+                throw new Exception("Error Processing Request", 1);
+                
+            }
+        }
     }
 }

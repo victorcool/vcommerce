@@ -7,7 +7,8 @@
 {{-- main row --}}
 <div class="row">
     <div class="col-md-12">       
-        {!! Form::open(['action' => 'admin\servicesController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+        {!! Form::open(['action' => 'admin\AOBcontroller@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+        {{ csrf_field() }}
         @include('administrator.assets.inc.forms.createServiceForm')
         {!! Form::close() !!}
     </div>

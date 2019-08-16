@@ -58,4 +58,27 @@ if(confirm('You want to delete service?')){
     }); 
 }
 });
+
+// For deleting roles 
+$('.rmRoleBtn').on('click',function(c){
+    c.preventDefault();
+if(confirm('You want to delete role?')){
+    var roleId = $(this).data('id');
+    var btn = this;
+        Pace.restart(); 
+    $.ajax({               
+        url:'/removeRole',
+        type:'GET',
+        data:{roleId:roleId},
+        success:function(result)
+        {
+            $(btn).closest('tr').fadeOut("slow");
+        },
+        error:function(){
+            alert('Error:process could not be completed');
+        }   
+    }); 
+}
+});
+
 });

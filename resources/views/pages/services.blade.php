@@ -21,7 +21,7 @@
         <div class="col-md-4 text-center">
         <embed src="{{asset('uploads/services_images/'.$service->icon)}}" class="img-circle serviceImg">
         <h4>{{$service->title}}</h4>
-        <div>{{$service->description}}</div>
+        <div><p class="my_p">{!!$service->description !!}</p></div>
         </div> 
         
         @endforeach

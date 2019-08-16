@@ -8,12 +8,10 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		
-
 	</div> 
 	<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 		<ul class="nav navbar-nav ">
-			<li class=" active"><a href="index.html" class="hyper "><span>Home</span></a></li>	
+		<li class=" active"><a href="{{url('/')}}" class="hyper "><span>Home</span></a></li>	
 			@if (count($categories) > 0)
 				@foreach ($categories as $category)
 					@if (! $category->subcategories->isEmpty())
@@ -24,7 +22,7 @@
 									@foreach ($category->subcategories as $subcateg)
 									<div class="col-sm-3">
 										<ul class="multi-column-dropdown">				
-											<li><a href="market/showroom/{{$subcateg->id}}"><i class="fa fa-angle-right" aria-hidden="true"></i>{{$subcateg->subcateg_name}}</a></li>												
+											<li><a href="{{url('market/showroom/subcategory/'.$subcateg->id)}}"><i class="fa fa-angle-right" aria-hidden="true"></i>{{$subcateg->subcateg_name}}</a></li>												
 										</ul>										
 										</div>
 									@endforeach								
@@ -36,7 +34,7 @@
 							</ul>
 						</li>
 					@else
-						<li><a href="#" class="hyper "><span>{{$category->category_name}}</span></a></li>
+						<li><a href="{{url('market/showroom/category/'.$category->id)}}" class="hyper "><span>{{$category->category_name}}</span></a></li>
 					@endif
 				@endforeach
 			@endif
