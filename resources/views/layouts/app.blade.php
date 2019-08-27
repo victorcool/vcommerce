@@ -5,7 +5,10 @@
 </head>
 <body>
 <!-- header -->
+@include('temp.topNavbar')
+
 @yield('content')
+
 <!-- //banner -->
 
 <!-- footer -->

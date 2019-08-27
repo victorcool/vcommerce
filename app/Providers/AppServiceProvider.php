@@ -22,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         $categories = Category::with('subcategories')->get(); 
         View::share('categories',$categories);
+
+        // for the main menu
        
     }
 

@@ -16,6 +16,22 @@ $(document).ready(function(){
                 }   
                 }); 
     });
+
+    $('#assignRole').change(function(d){
+        d.preventDefault();
+        var role = $(this).val();
+        switch (role) {
+            case 'Member':
+                $('#adminDetailForm').fadeOut('slow');
+                break;            
+                    
+            default:
+                $('#adminDetailForm').fadeIn('slow');
+            break;
+        }
+             Pace.restart(); 
+              
+    });
 // For deleting tags 
     $('.rmTagBtn').on('click',function(d){
         d.preventDefault();
@@ -72,6 +88,29 @@ if(confirm('You want to delete role?')){
         data:{roleId:roleId},
         success:function(result)
         {
+            $(btn).closest('tr').fadeOut("slow");
+        },
+        error:function(){
+            alert('Error:process could not be completed');
+        }   
+    }); 
+}
+});
+
+// For deleting utility
+$('.rmUtilityBtn').on('click',function(c){
+    c.preventDefault();
+if(confirm('You want to delete utility?')){
+    var utilityId = $(this).data('id');
+    var btn = this;
+        Pace.restart(); 
+    $.ajax({               
+        url:'/removeUtility',
+        type:'GET',
+        data:{utilityId:utilityId},
+        success:function(result)
+        {
+            alert(result);
             $(btn).closest('tr').fadeOut("slow");
         },
         error:function(){

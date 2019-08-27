@@ -6,3 +6,18 @@
     -o-background-size: cover;
     -moz-background-size: cover;
 }
+
+.noBorderButShadow{
+    border-radius: 0;
+    background: #fcfcfc;
+    border: none;
+    box-shadow: 0px 15px 8px #f0f0f0;
+}
+
+.bg-custom{
+    background: #fcfcfc;
+}
+
+.bg-custom:hover{
+    background: #00cb00;
+}

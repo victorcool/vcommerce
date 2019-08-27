@@ -4,9 +4,7 @@
 @endsection
 @section('content')
 
-@section('topNavbar')
-    @include('temp.topNavbar')
-@endsection
+
 
 @section('mainNavbar')
     @include('temp.mainNavbar')

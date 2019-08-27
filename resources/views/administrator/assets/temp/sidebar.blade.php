@@ -71,7 +71,8 @@
           <li><a href="{{url('administrator/tags')}}"><span class="sidebarMenu"><i class="fa fa-circle-o text-yellow"></i> Tags<span class="label label-primary" id="availB"></span></a></li>
           <li><a href="{{url('administrator/configurations')}}"><span class="sidebarMenu"><i class="fa fa-circle-o text-yellow"></i> Configuration<span class="label label-primary" id="availB"></span></a></li>
           <li><a href="{{url('administrator/UserRoles')}}"><span class="sidebarMenu"><i class="fa fa-circle-o text-yellow"></i> User roles<span class="label label-primary" id="availB"></span></a></li>
-          <li><a href="{{url('administrator/about')}}"><span class="sidebarMenu"><i class="fa fa-circle-o text-yellow"></i> About us<span class="label label-primary" id="availB"></span></a></li>
+          <li><a href="{{url('administrator/utility')}}"><span class="sidebarMenu"><i class="fa fa-circle-o text-yellow"></i> About us<span class="label label-primary" id="availB"></span></a></li>
+          <li><a href="{{url('administrator/team')}}"><span class="sidebarMenu"><i class="fa fa-circle-o text-yellow"></i> team<span class="label label-primary" id="availB"></span></a></li>
         </ul>
     </li>
       </ul>     

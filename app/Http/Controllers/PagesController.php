@@ -8,6 +8,7 @@ use View;
 use App\Product;
 use App\Setting;
 use App\Service;
+use App\Utility;
 
 class PagesController extends Controller
 { 
@@ -16,9 +17,45 @@ class PagesController extends Controller
         return view('pages.index')->with('title',$title);
     }
 
-    public function about(){
+    public function introduction(){
         $title = 'Know who and what is healmass';
-        return view('pages.about')->with('title',$title);
+        $introductions = DB::table('utilities as u')
+        ->leftjoin('labels as ts', 'ts.id', '=', 'u.label')
+        ->where('ts.name','=','introduction')
+        ->select('*')
+        ->get();
+        // lets get the teams
+        $team = DB::table('users as u')
+        ->leftjoin('team_socials as ts', 'ts.user', '=', 'u.id')
+        ->leftjoin('user_roles as ur', 'ur.user_id', '=', 'u.id')
+        ->leftjoin('roles as r', 'ur.role_id', '=', 'r.id')
+        ->where('r.role_name','=','Team')
+        ->select('*')
+        ->get();
+        return view('pages.introduction')->with([
+            'title'=> $title, 'introductions' => $introductions, 'team' => $team
+            ]);
+    }
+
+    public function history(){
+        $title = 'Know where how far we have come';
+      
+         $histories = DB::table('utilities as u')
+                 ->leftjoin('labels as ts', 'ts.id', '=', 'u.label')
+                 ->where('ts.name','=','history')
+                 ->select('*')
+                 ->get();
+         // lets get the teams
+         $team = DB::table('users as u')
+         ->leftjoin('team_socials as ts', 'ts.user', '=', 'u.id')
+         ->leftjoin('user_roles as ur', 'ur.user_id', '=', 'u.id')
+         ->leftjoin('roles as r', 'ur.role_id', '=', 'r.id')
+         ->where('r.role_name','=','Team')
+         ->select('*')
+         ->get();
+         return view('pages.history')->with([
+             'title'=> $title, 'histories' => $histories, 'team' => $team
+             ]);
     }
 
     public function services(){
