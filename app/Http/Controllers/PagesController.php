@@ -9,12 +9,15 @@ use App\Product;
 use App\Setting;
 use App\Service;
 use App\Utility;
+use Session;
 
 class PagesController extends Controller
 { 
+
     public function index(){
         $title = 'Home | Healmass bring you the best agricultural products';
-        return view('pages.index')->with('title',$title);
+       $visionMission = Utility::where('label',5)->get();
+        return view('pages.index')->with(['title'=>$title,'visionMission'=>$visionMission]);
     }
 
     public function introduction(){

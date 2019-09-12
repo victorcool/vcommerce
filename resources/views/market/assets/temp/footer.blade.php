@@ -1,7 +1,6 @@
 <!--footer-->
 <div class="footer">
-	<div class="container">
-	
+	<div class="container">	
 		<div class="clearfix"></div>
 			<div class="footer-bottom">
 			<h2 ><a href="index.html"><b>A<br>G<br>O</b>{{config('app.name')}}<span>The Best AgroMarket</span></a></h2>
@@ -27,7 +26,7 @@
 					</div>
 			</div>
 		<div class="copy-right">
-			<p> &copy; 2016 Big store. All Rights Reserved | Design by  <a href="http://w3layouts.com/"> W3layouts</a></p>
+			<p> &copy; 2019-{{date('Y')}} {{config('app.name')}}. All Rights Reserved | Design by  <a href="http://allforteck.com/"> Allforteck</a></p>
 		</div>
 	</div>
 </div>

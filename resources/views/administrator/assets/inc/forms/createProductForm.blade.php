@@ -4,8 +4,19 @@
     <div class="box-body">          
             <div class="box-body">
               <div class="row">
-                @include('administrator/assets.inc.forms.imageUploadBox')
-               
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="state">Which state</label>
+                        <select name="state" id="State" class="form-control input-sm">
+                          @foreach ($states as $state)
+                        <option value="{{$state->id}}">{{$state->title}}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                </div>
+                <div class="col-md-6">
+                  @include('administrator/assets.inc.forms.imageUploadBox')
+                </div>              
               </div>
                 <div class="row">
                     <div class="col-md-6">

@@ -12,8 +12,7 @@
         {{-- {{Form::hidden('_method','PUT')}} --}}
         
         @include('administrator.assets.inc.forms.editServiceForm')
-        </form>
-        
+        </form>        
     </div>
     <div class="col-md-2">
     <div class="row">

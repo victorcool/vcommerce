@@ -29,6 +29,13 @@ if(!function_exists('countMembers')){
 	}
 }
 
+if(!function_exists('tax')){
+	function tax($tax){
+		$t = $tax;
+		return $t;
+	}
+}
+
 
 
 

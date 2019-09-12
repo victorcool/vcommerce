@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use View;
 use App\Service;
+use App\Product;
+use App\product_images;
 use Validator;
 use DB;
 use Redirect;
@@ -150,6 +152,85 @@ class AOBcontroller extends Controller
             }
             
         }
+    }
+
+    public function updateProductImg(Request $request, $id)
+    {
+        $imageId = product_images::findOrfail($id);
+        $rules = [
+            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ];
+
+        $validator = Validator::make($request->all(),$rules);
+        if ( $validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator);
+        } else {
+            // update the image 
+            if ($request->hasfile('image')) {
+                $image = $request->file('image');
+                // Get filename with ext
+                $filenameWithExt = $image->getClientOriginalName();
+                // Get just the filename
+                $filename = pathinfo($filenameWithExt,PATHINFO_FILENAME);
+                // Get the extention
+                $extension = $image->getClientOriginalExtension();
+                // the file to store
+                $fileNameToStore = $filename.'_'.time().'.'.$extension;
+                Image::make($image)->resize(200,200)->save(public_path('/uploads/products_images/'. $fileNameToStore)); 
+                $imageId->image = $fileNameToStore;
+                $imageId->save();
+                return redirect()->back()->with('success','Image updated');
+            } else {
+                return redirect()->back()->with('error','No image selected');
+            }
+            
+        }
+    }
+
+    public function productUpdate(Request $request,$id)
+    {
+        $rules = [
+            'product_name'=> 'required',
+            'regularPrice'=> 'required',
+            'discountPrice'=> 'required',
+            'quantity'=> 'required',
+            'subcategory'=> 'nullable',
+            'description'=> 'required',
+            
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            $tag = $request->input('tag');
+            return redirect()->back()->withInput()->withErrors($validator);
+        }else{
+            $regular_price = $request->input('regularPrice');
+            $discount_price = $request->input('discountPrice');
+            // is discount<regular?
+        if ($discount_price >= $regular_price) {
+            return redirect()->back()->withInput()->with('error','ERROR: Discount price can not be greater than or equal to regular price');
+        }else {
+            try {
+            return $product = DB::table('products')->where('id','=', $id)->get();
+            // $product->states_id = $request->input('state');
+            $product->product_name = $request->input('product_name');
+            $product->regular_price = $request->input('regularPrice');
+            $product->discount_price = $request->input('discountPrice');
+            $product->product_status_id = $request->input('status');
+            $product->description = $request->input('description');
+            $product->category_id = $request->input('category');
+            $product->subcateg_id = $request->input('subcategory');
+            $product->qauntity = $request->input('quantity');
+            $product->save();           
+             return redirect()->to('/administrator/products')->with('success','product Updated');              
+        
+            } catch (\Throwable $th) {
+                $error =  Session::flash('error', 'Sorry, operation could not be completed.'.$th->getMessage());
+                return redirect()->back()->with($error);
+            }
+
+    }
+    }
     }
 
   

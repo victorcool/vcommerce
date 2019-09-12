@@ -3,21 +3,7 @@
            
         <div class="box-body">          
                 <div class="box-body">
-                  <div class="row">
-                       @foreach ($prevProduct as $prevPro)
-                           <div class="col-md-3">
-                           <img src="{{asset('uploads/products_images/'.$prevPro->image)}}" class="img-thumbnail" alt="no image" sizes="" srcset="">
-                           <div class="wrap-custom-file col-md-3 col-xs-6 {{($errors->has('image1')) ? 'has-error' : '' }}">
-                                <input type="file" name="image[]" id="image1" accept=".gif, .jpg, .png" />
-                                <label  for="image1">
-                                  <span>Image One</span>
-                                  <i class="fa fa-plus-circle"></i>
-                                </label>
-                              </div>
-                              <button type="button" class="btn btn-xs btn-default">Save</button>
-                           </div>
-                       @endforeach             
-                  </div>
+                  
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">

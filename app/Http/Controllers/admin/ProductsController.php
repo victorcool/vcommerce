@@ -14,6 +14,7 @@ use App\SubCategory;
 use App\product_images;
 use App\product_tags;
 use App\tags;
+use App\State;
 use DB;
 
 class ProductsController extends Controller
@@ -52,7 +53,9 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view::make('administrator.products.create')->with('tags',$this->productTags());
+        $states = State::all();
+        return view::make('administrator.products.create')
+        ->with(['tags'=>$this->productTags(), 'states' => $states]);
     }
 
     public function store(Request $request)
@@ -64,6 +67,7 @@ class ProductsController extends Controller
             'quantity'=> 'required',
             'subcategory'=> 'nullable',
             'description'=> 'required',
+            'state'=> 'required',
             // 'image' => 'image|nullable',
             'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'tag'=> 'required'
@@ -82,6 +86,7 @@ class ProductsController extends Controller
         }else {
             try {
             $product = new Product;
+            $product->states_id = $request->input('state');
             $product->product_name = $request->input('product_name');
             $product->regular_price = $request->input('regularPrice');
             $product->discount_price = $request->input('discountPrice');
@@ -100,7 +105,10 @@ class ProductsController extends Controller
                 {          
                     $name = $image->getClientOriginalName();
                     $filename = time().'.'.$image->getClientOriginalExtension();
-                    Image::make($image)->resize(320,320)->save(public_path('/uploads/products_images/'. $filename));      
+                    Image::make($image)->fit(320,320,function ($constraint){
+                        $constraint->upsize();
+                    })
+                    ->save(public_path('/uploads/products_images/'. $filename));      
                     $productImg = new product_images;
                     $productImg->product_id = $last_inserted_product_id;
                     $productImg->image = $filename;
@@ -159,14 +167,68 @@ class ProductsController extends Controller
     }
 
    
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        //
+        $rules = [
+            'product_name'=> 'required',
+            'regularPrice'=> 'required',
+            'discountPrice'=> 'required',
+            'quantity'=> 'required',
+            'subcategory'=> 'nullable',
+            'description'=> 'required',
+            
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            $tag = $request->input('tag');
+            return redirect()->back()->withInput()->withErrors($validator);
+        }else{
+            $regular_price = $request->input('regularPrice');
+            $discount_price = $request->input('discountPrice');
+            // is discount<regular?
+        if ($discount_price >= $regular_price) {
+            return redirect()->back()->withInput()->with('error','ERROR: Discount price can not be greater than or equal to regular price');
+        }else {
+            try {
+            $product = Product::findOrfail($id);
+            // $product->states_id = $request->input('state');
+            $product->product_name = $request->input('product_name');
+            $product->regular_price = $request->input('regularPrice');
+            $product->discount_price = $request->input('discountPrice');
+            $product->product_status_id = $request->input('status');
+            $product->description = $request->input('description');
+            $product->category_id = $request->input('category');
+            $product->subcateg_id = $request->input('subcategory');
+            $product->qauntity = $request->input('quantity');
+            $product->save();           
+             return redirect()->to('/administrator/products')->with('success','product Updated');              
+        
+            } catch (\Throwable $th) {
+                $error =  Session::flash('error', 'Sorry, operation could not be completed.'.$th->getMessage());
+                return redirect()->back()->with($error);
+            }
+
+    }
+    }
     }
 
   
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        if ($request->has('productId')) {
+            $productId = $request->productId;
+            $product = Product::find($productId);            
+            if($product->delete())
+            {
+                $image = product_images::where('product_id',$productId);
+                $image->delete();
+            }else{
+                throw new Exception("Error Processing Request", 1);
+                
+            }
+
+
+        }
     }
 }

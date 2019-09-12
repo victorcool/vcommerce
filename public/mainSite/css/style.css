@@ -13,8 +13,9 @@ body{
 
 .noBorder_addShadow{
     box-shadow:0px 15px 8px #f1f0f0;
+    border-radius:0px !important;
     border: none;
-}
+    }
 .list-group-item{
     border-radius: 0px !important;
 }

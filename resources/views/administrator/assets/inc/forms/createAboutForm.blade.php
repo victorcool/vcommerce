@@ -42,6 +42,9 @@
                             </span>
                         @endif
                     </div>
+                    <div class="form-group">
+                      <input type="file" name="image" class="form-group input-sm">
+                    </div>
                   </div>
                 </div>
             <!-- /.box-body -->

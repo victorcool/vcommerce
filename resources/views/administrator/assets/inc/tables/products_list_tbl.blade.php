@@ -25,7 +25,7 @@
                     <td>{{$product->created_at}}</td>
                   <td>
                     <a href="{{url('administrator/products/'.$product->id.'/edit')}}" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                    <a href="#" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
+                  <a href="#" data-id="{{$product->id}}" class="btn btn-xs btn-danger rmProductBtn"><i class="fa fa-trash"></i></a>
                   </td>              
                   </tr> 
               @endforeach

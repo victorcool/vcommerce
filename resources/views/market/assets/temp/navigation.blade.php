@@ -43,9 +43,8 @@
 		</ul>
 	</div>
 	</nav>
-	 <div class="cart" >
-	
-		<span class="fa fa-shopping-cart my-cart-icon"><span class="badge badge-notify my-cart-badge"></span></span>
+	 <div class="cart" >	
+	 <a href="{{route('cart.index')}}" class="fa fa-shopping-cart "><span class="badge badge-notify my-cart-badge">{{Cart::instance('default')->count()}}</span></a>
 	</div>
 	<div class="clearfix"></div>
 </div>

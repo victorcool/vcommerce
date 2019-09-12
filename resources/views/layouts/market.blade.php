@@ -21,10 +21,11 @@
 
 
 
-@include('market/assets.temp.slider')
 
 <!--content-->
-@yield('content');
+@yield('content')
+
+@yield('notice')
 	{{-- <div class="product">
 		<div class="container">
 			<div class="spec ">
@@ -223,9 +224,7 @@
 
 @include('market/assets.inc.jsLinks')
 
-<div>
 	@yield('otherjs')
-</div>
   			
 </body>
 </html>
